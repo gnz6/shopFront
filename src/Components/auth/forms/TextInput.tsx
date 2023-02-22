@@ -15,7 +15,7 @@ export const TextInput = ({ label, ...props }: Props) => {
     <>
       <label htmlFor={props.id || props.name}>
         {label}
-        <input type="text" className="text-input" {...field} {...props} />
+        <input type="text" className="text-input border p-2 m-2 hover:bg-[#eee] duration-150" {...field} {...props} />
       </label>
       <ErrorMessage name={props.name} component={"span"} />
     </>

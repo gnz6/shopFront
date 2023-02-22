@@ -2,7 +2,7 @@
 export const Homepage = () => {
   return (
     <>
-        home
+        <h1> All Products </h1>
     </>
   )
 }

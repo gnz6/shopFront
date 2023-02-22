@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { Logout } from "../auth/forms/Logout"
 
 
 
@@ -6,12 +7,17 @@ import { NavLink } from "react-router-dom"
 export const Navbar = () => (
     <div>
         
-   <nav className="fixed bg-black text-white w-full h-8">
-    <ul>
+   <nav className="fixed bg-black text-white w-full h-[50px] items-center">
+    <ul className="flex  justify-between">
         <li>
             <h1>Sportia</h1>
         </li>
+        <li>
+            <Logout/>
+        </li>
+
     </ul>
+
    </nav>
     </div>
 )

@@ -1,35 +1,43 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { authInterface } from "../../../interfaces/userInterface";
+
+const initialAuthState: authInterface = {
+  uid: null,
+  email: null,
+  name: null,
+  errorMessage: "",
+  status: "false",
+};
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    status: "checking",
-    uid: null,
-    email: null,
-    displayName: null,
-    photoUrl: null,
-    errorMessage: null,
-  },
+  initialState: initialAuthState,
   reducers: {
-    login: (state, { payload }) => {
-      (state.status = "authenticated"), (state.uid = payload.uid);
+    login: (
+      state,
+      { payload }: PayloadAction<{ name: string; uid: string; email: string }>
+    ) => {
+      (state.status = "true"), (state.uid = payload.uid);
       state.email = payload.email;
-      state.displayName = payload.displayName;
-      state.photoUrl = payload.photoURL;
+      state.name = payload.name;
       state.errorMessage = null;
     },
-    logout: (state, payload) => {
+    logout: (state, {payload}: PayloadAction<{errorMessage? : string }>) => {
       state.status = "false";
       state.uid = null;
       state.email = null;
-      state.displayName = null;
-      state.photoUrl = null;
-      state.errorMessage = payload?.payload;
+      state.name = null;
+      state.errorMessage = payload.errorMessage;
     },
     checkingCredentials: (state) => {
       state.status = "checking";
+      state.errorMessage = null;
+    },
+    clearErrorMessage: (state) => {
+      state.errorMessage = null;
     },
   },
 });
 
-export const { login , logout , checkingCredentials } = authSlice.actions;
+export const { login, logout, checkingCredentials, clearErrorMessage } =
+  authSlice.actions;
